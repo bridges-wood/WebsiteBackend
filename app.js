@@ -1,4 +1,5 @@
-import express, { json } from 'express'
+import express from 'express'
+import 'express-async-errors'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import config from './utils/config.js'
@@ -27,7 +28,7 @@ mongoose.connect(config.MONGODB_URI,
 	})
 
 app.use(cors())
-app.use(json())
+app.use(express.json())
 app.use(middleware.requestLogger)
 app.use('/api/projects', projectsRouter)
 app.use('/api/users', usersRouter)

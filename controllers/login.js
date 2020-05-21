@@ -31,4 +31,4 @@ loginRouter.post('/', async (req, res) => {
 		.send({ token, username: user.username, name: user.name })
 })
 
-module.exports = loginRouter
+export default loginRouter

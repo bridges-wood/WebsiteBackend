@@ -8,14 +8,13 @@ const projectsRouter = express.Router()
 
 
 projectsRouter.get('/', async (req, res) => {
-	
-	const { body } = req
+	const query = new URLSearchParams(req.query)
 	const { token } = req
 
-	if ( body.refresh ) {
+	if ( query.get('refresh') === 'true' ) {
 		const decodedToken = jwt.verify(token, process.env.SECRET)
 		if ( !token || !decodedToken.id ) {
-			res.status(401).json({ error: 'token missing or invalid id'})
+			res.status(401).json({ error: 'missing or invalid token'})
 		}
 
 		const user = await User.findById(decodedToken.id)
@@ -23,7 +22,7 @@ projectsRouter.get('/', async (req, res) => {
 			res.status(401).json({ error: 'you do not have administrator privledges'})
 		} else {
 			try {
-				const refreshedProjects = refresh()
+				const refreshedProjects = await refresh()
 				res.json(refreshedProjects)
 			} catch (error) {
 				res.status(503).json({ error: 'database could not be refreshed'})
@@ -35,4 +34,4 @@ projectsRouter.get('/', async (req, res) => {
 	}
 })
 
-module.exports = projectsRouter
+export default projectsRouter
