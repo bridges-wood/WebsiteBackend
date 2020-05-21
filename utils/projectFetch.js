@@ -1,8 +1,8 @@
-const axios = require('axios')
-const parser = require('page-metadata-parser')
-const fetch = require('node-fetch')
-const domino = require('domino')
-const Project = require('../models/project')
+import axios from 'axios'
+import parser from 'page-metadata-parser'
+import fetch from 'node-fetch'
+import domino from 'domino'
+import Project from '../models/project.js'
 
 const baseUrl = 'https://api.github.com'
 const user = 'bridges-wood'
@@ -15,7 +15,7 @@ const metaRules = {
 	]
 }
 
-const getREADME = async (name) => {
+export const getREADME = async (name) => {
 	try {
 		const res = await axios.get(`${baseUrl}/repos/${user}/${name}/readme`, config)
 		const readme = await axios.get(res.data.download_url)
@@ -25,7 +25,7 @@ const getREADME = async (name) => {
 	}
 }
 
-const getLanguages = async (name) => {
+export const getLanguages = async (name) => {
 	try {
 		const res = await axios.get(`${baseUrl}/repos/${user}/${name}/languages`, config)
 		const languages = res.data
@@ -35,7 +35,7 @@ const getLanguages = async (name) => {
 	}
 }
 
-const getMeta = async (repoURL) => {
+export const getMeta = async (repoURL) => {
 	const res = await fetch(repoURL)
 	const html = await res.text()
 	const doc = domino.createWindow(html).document
@@ -43,7 +43,7 @@ const getMeta = async (repoURL) => {
 	return metadata
 }
 
-const formatRepo = async (repo) => {
+export const formatRepo = async (repo) => {
 	const [README, languages, metadata] = await Promise.all([
 		getREADME(repo.name),
 		getLanguages(repo.name),
@@ -75,9 +75,4 @@ const refresh = async () => {
 	}
 }
 
-module.exports = { 
-	getREADME,
-	getLanguages,
-	getMeta,
-	formatRepo,
-	refresh }
+export default refresh

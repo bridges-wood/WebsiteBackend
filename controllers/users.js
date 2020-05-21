@@ -1,6 +1,9 @@
-const bcrypt = require('bcrypt')
-const usersRouter = require('express').Router()
-const User = require('../models/user')
+import bcrypt from 'bcrypt'
+import express from 'express'
+import User from '../models/user.js'
+
+const usersRouter = express.Router()
+
 
 usersRouter.get('/', async (req, res) => {
 	const users = await User.find({})
@@ -30,4 +33,4 @@ usersRouter.post('/', async (req, res) => {
 	res.json(savedUser)
 })
 
-module.exports = usersRouter
+export default usersRouter

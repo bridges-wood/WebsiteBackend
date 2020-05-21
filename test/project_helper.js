@@ -1,6 +1,8 @@
-const jwt = require('jsonwebtoken')
-const Project = require('../models/project.js')
-const User = require('../models/user.js')
+import jwt from 'jsonwebtoken'
+import Project from '../models/project.js'
+import User from '../models/user.js'
+
+const supertest = require('supertest')
 
 const initialProjects = [{
 	_id: '5a422a851b54a676234d17f7',
@@ -42,7 +44,8 @@ const getAuthToken = async () => {
 	return jwt.sign(userForToken, process.env.SECRET)
 }
 
-module.exports = {
+export default {
+	supertest,
 	projectsInDB,
 	testUser,
 	initialProjects,

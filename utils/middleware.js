@@ -1,4 +1,4 @@
-const logger = require('./logger')
+import logger from './logger.js'
 
 const requestLogger = (req, res, next) => {
 	logger.info('Method:', req.method)
@@ -38,7 +38,7 @@ const errorHandler = (err, req, res, next) => {
 }
 
 
-module.exports = {
+export default {
 	requestLogger,
 	unknownEndpoint,
 	errorHandler,
