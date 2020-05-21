@@ -1,6 +1,8 @@
-const router = require('express').Router()
-const Project = require('../models/project')
-const User = require('../models/user')
+import express from 'express'
+import Project from '../models/project.js'
+import User from '../models/user.js'
+
+const router = express.Router()
 
 router.post('/reset', async (req, res) => {
 	await Project.deleteMany({})
@@ -9,4 +11,4 @@ router.post('/reset', async (req, res) => {
 	res.status(204).end()
 })
 
-module.exports = router
+export default router

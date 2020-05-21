@@ -1,12 +1,13 @@
-const projectsRouter = require('express').Router()
-const jwt = require('jsonwebtoken')
-const Project = require('../models/project')
-const User = require('../models/user')
-const refresh = require('../utils/projectFetch')
+import express from 'express'
+import jwt from 'jsonwebtoken'
+import Project from '../models/project.js'
+import User from '../models/user.js'
+import refresh from '../utils/projectFetch.js'
+
+const projectsRouter = express.Router()
 
 
 projectsRouter.get('/', async (req, res) => {
-	console.log('here')
 	
 	const { body } = req
 	const { token } = req

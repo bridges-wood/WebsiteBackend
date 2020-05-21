@@ -1,18 +1,19 @@
-const express = require('express')
-const cors = require('cors')
-const mongoose = require('mongoose')
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-const middleware = require('./utils/middleware')
+import express, { json } from 'express'
+import cors from 'cors'
+import mongoose from 'mongoose'
+import config from './utils/config.js'
+import logger from './utils/logger.js'
+import middleware from './utils/middleware.js'
 
 const app = express()
 app.set('trust proxy', 'loopback')
 
 app.use(middleware.tokenExtractor)
 
-const projectsRouter = require('./controllers/projects')
-const usersRouter = require('./controllers/users')
-const loginRouter = require('./controllers/login')
+import projectsRouter from './controllers/projects.js'
+import usersRouter from './controllers/users.js'
+import loginRouter from './controllers/login.js'
+import testingRouter from './controllers/test_router.js'
 
 logger.info('Connecting to', config.MONGODB_URI)
 
@@ -26,17 +27,16 @@ mongoose.connect(config.MONGODB_URI,
 	})
 
 app.use(cors())
-app.use(express.json())
+app.use(json())
 app.use(middleware.requestLogger)
 app.use('/api/projects', projectsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
 if(process.env.NODE_ENV === 'test'){
-	const testingRouter = require('./controllers/test_router')
 	app.use('/api/testing', testingRouter)
 }
 
 app.use(middleware.errorHandler)
 
-module.exports = app
+export default app

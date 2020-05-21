@@ -1,12 +1,10 @@
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const projectHelper = require('./project_helper')
-const app = require('../app')
+import mongoose from 'mongoose'
+import projectHelper from './project_helper.js'
+import app from '../app.js'
+import Project from '../models/project.js'
+import User from '../models/user.js'
 
-const api = supertest(app)
-
-const Project = require('../models/project')
-const User = require('../models/user')
+const api = projectHelper.supertest(app)
 
 let authToken = ''
 

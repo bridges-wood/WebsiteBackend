@@ -1,4 +1,4 @@
-const { getMeta } = require('../utils/projectFetch')
+import { getMeta } from '../utils/projectFetch.js'
 
 describe('fetching metadata', () => {
 	test('from github repository works as expected', async () => {

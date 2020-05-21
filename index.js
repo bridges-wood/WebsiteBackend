@@ -1,9 +1,9 @@
-const http = require('http')
-const app = require('./app')
-const config = require('./utils/config')
+import http from 'http'
+import app from './app.js'
+import { PORT } from './utils/config.js'
 
 const server = http.createServer(app)
 
-server.listen(config.PORT, () => {
-	console.log(`Server running on port ${config.PORT}`)
+server.listen(PORT, () => {
+	console.log(`Server running on port ${PORT}`)
 })

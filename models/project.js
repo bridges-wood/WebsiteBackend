@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const projectSchema = mongoose.Schema({
 	id: {
@@ -46,4 +46,6 @@ projectSchema.set('toJSON', {
 	},
 })
 
-module.exports = mongoose.model('Project', projectSchema)
+const Project = mongoose.model('Project', projectSchema)
+
+export default Project
