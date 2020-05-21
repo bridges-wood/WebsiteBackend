@@ -1,0 +1,38 @@
+{
+  "name": "websitebackend",
+  "version": "1.0.0",
+  "description": "Backend for portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "dev": "nodemon index.js"
+  },
+  "author": "Max Wood",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "domino": "^2.1.5",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.0.0",
+    "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.15",
+    "mongoose-unique-validator": "^2.0.3",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.4",
+    "page-metadata-parser": "^1.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.13.1",
+    "supertest": "^4.0.2"
+  }
+}
