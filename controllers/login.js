@@ -8,8 +8,7 @@ const loginRouter = express.Router()
 loginRouter.post('/', async (req, res) => {
 	const { body } = req
 
-	if (!body.verify) 
-	{
+	if (!body.verify) {
 		const user = await User.findOne({ username: body.username })
 		const passwordCorrect = user === null
 			? false
@@ -36,14 +35,14 @@ loginRouter.post('/', async (req, res) => {
 			const decoded = jwt.verify(body.token, process.env.SECRET)
 			const unixTime = Math.round(new Date().getTime() / 1000)
 			if ( (unixTime - decoded.iat) > 3600 ) {
-				res.status(401).json({
-					error: 'token timed out'
-				})
+				throw new Error
 			}
 			res.status(200).send(body)
 		} catch (error) {
 			res.status(401).json({
-				error: 'invalid session token'
+				error: {
+					message: 'invalid session token'
+				}
 			})
 		}
 	}

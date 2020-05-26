@@ -67,11 +67,11 @@ const refresh = async () => {
 	const repos = await Promise.all(res.data.map(async (repo) => formatRepo(repo)))
 	const transformed = repos.map(project => new Project({...project}))
 	try {
-		Project.deleteMany({})
+		await Project.deleteMany({})
 		transformed.forEach(async (project) => await project.save())
 		return repos
 	} catch (error) {
-		return {error: 'there was an error updating the database'}
+		return { error: 'there was an error updating the database' }
 	}
 }
 
