@@ -35,11 +35,12 @@ export const getLanguages = async (name) => {
 	}
 }
 
-export const getMeta = async (repoURL) => {
+export const getMeta = async (repoURL, id) => {
 	const res = await fetch(repoURL)
 	const html = await res.text()
 	const doc = domino.createWindow(html).document
 	const metadata = parser.getMetadata(doc, repoURL, {repoImage: metaRules})
+	if (metadata.repoImage === `https://avatars1.githubusercontent.com/u/${id}?s=400&v=4`) return {repoImage: null}
 	return metadata
 }
 
@@ -47,7 +48,7 @@ export const formatRepo = async (repo) => {
 	const [README, languages, metadata] = await Promise.all([
 		getREADME(repo.name),
 		getLanguages(repo.name),
-		getMeta(repo.html_url)
+		getMeta(repo.html_url, repo.owner.id)
 	])
 	return {
 		id: repo.id,
