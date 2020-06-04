@@ -37,6 +37,7 @@ loginRouter.post('/', async (req, res) => {
 			if ( (unixTime - decoded.iat) > 3600 ) {
 				throw new Error
 			}
+			delete body.verify
 			res.status(200).send(body)
 		} catch (error) {
 			res.status(401).json({

@@ -28,7 +28,11 @@ export const getREADME = async (name) => {
 export const getLanguages = async (name) => {
 	try {
 		const res = await axios.get(`${baseUrl}/repos/${user}/${name}/languages`, config)
-		const languages = res.data
+		const languages = []
+		Object.keys(res.data).map(language => languages.push({
+			name: language,
+			bytes: res.data[language]
+		}))
 		return languages
 	} catch (error) {
 		return null
