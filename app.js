@@ -2,7 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import helmet from 'helmet'
+import helmet from 'helmet-csp'
 import config from './utils/config.js'
 import logger from './utils/logger.js'
 import middleware from './utils/middleware.js'
@@ -10,9 +10,9 @@ import middleware from './utils/middleware.js'
 const app = express()
 app.set('trust proxy', 'loopback')
 
-app.use(helmet.contentSecurityPolicy({
+app.use(helmet({
 	directives: {
-		defaultSrc: ['*']
+		defaultSrc: ['self']
 	}
 }))
 app.use(middleware.tokenExtractor)
