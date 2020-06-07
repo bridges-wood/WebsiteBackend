@@ -9,7 +9,7 @@
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ../Frontend && npm run build --prod && cp -r build ../Backend/",
     "deploy": "git push heroku master",
-    "deploy:full": "git push origin master && npm run build:ui & git add . && git commit -m uibuild && npm run deploy",
+    "deploy:full": "npm run build:ui & git add . && git commit -m uibuild && npm run deploy && git push origin master",
     "logs:prod": "heroku logs --tail"
   },
   "author": "Max Wood",
