@@ -10,11 +10,6 @@ import middleware from './utils/middleware.js'
 const app = express()
 app.set('trust proxy', 'loopback')
 
-app.use(helmet({
-	directives: {
-		fontSrc: ['\'self\'', 'data:']
-	}
-}))
 app.use(middleware.tokenExtractor)
 
 import projectsRouter from './controllers/projects.js'
@@ -41,6 +36,11 @@ app.use('/api/projects', projectsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use(express.static('build'))
+app.use(helmet({
+	directives: {
+		fontSrc: ['\'self\'', 'data:', 'https://fonts.gstatic.com']
+	}
+}))
 
 if(process.env.NODE_ENV === 'test'){
 	app.use('/api/testing', testingRouter)
