@@ -9,6 +9,7 @@ import middleware from './utils/middleware.js'
 const app = express()
 app.set('trust proxy', 'loopback')
 
+app.use(middleware.contentSecurityPolicy)
 app.use(middleware.tokenExtractor)
 
 import projectsRouter from './controllers/projects.js'

@@ -1,5 +1,10 @@
 import logger from './logger.js'
 
+const contentSecurityPolicy = (req, res, next) => {
+	res.setHeader('CONTENT-SECURITY-POLICY', 'default-src *')
+	next()
+}
+
 const requestLogger = (req, res, next) => {
 	logger.info('Method:', req.method)
 	logger.info('Path: ', req.path)
@@ -43,4 +48,5 @@ export default {
 	unknownEndpoint,
 	errorHandler,
 	tokenExtractor,
+	contentSecurityPolicy
 }
