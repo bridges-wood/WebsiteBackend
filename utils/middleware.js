@@ -1,7 +1,7 @@
 import logger from './logger.js'
 
 const contentSecurityPolicy = (req, res, next) => {
-	res.setHeader('CONTENT-SECURITY-POLICY', 'default-src *')
+	res.setHeader('CONTENT-SECURITY-POLICY', 'default-src '*'')
 	next()
 }
 
