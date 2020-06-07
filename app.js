@@ -3,11 +3,13 @@ import 'express-async-errors'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import helmet from 'helmet-csp'
+import history from 'connect-history-api-fallback'
 import config from './utils/config.js'
 import logger from './utils/logger.js'
 import middleware from './utils/middleware.js'
 
 const app = express()
+app.use(history())
 app.set('trust proxy', 'loopback')
 
 app.use(middleware.tokenExtractor)
