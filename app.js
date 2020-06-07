@@ -12,7 +12,6 @@ app.set('trust proxy', 'loopback')
 
 app.use(helmet({
 	directives: {
-		defaultSrc: ['*'],
 	}
 }))
 app.use(middleware.tokenExtractor)
