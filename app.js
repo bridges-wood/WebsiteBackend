@@ -2,6 +2,7 @@ import express from 'express'
 import 'express-async-errors'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import helmet from 'helmet'
 import config from './utils/config.js'
 import logger from './utils/logger.js'
 import middleware from './utils/middleware.js'
@@ -9,7 +10,11 @@ import middleware from './utils/middleware.js'
 const app = express()
 app.set('trust proxy', 'loopback')
 
-app.use(middleware.contentSecurityPolicy)
+app.use(helmet.contentSecurityPolicy({
+	directives: {
+		defaultSrc: ['*']
+	}
+}))
 app.use(middleware.tokenExtractor)
 
 import projectsRouter from './controllers/projects.js'
